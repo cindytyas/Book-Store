@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +19,8 @@ class SesiController extends Controller
             'email' => 'required',
             'password' => 'required'
         ], [
-            'email.required' => 'Email must be filled',
-            'password.required' => 'Password must be filled'
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Password harus diisi',
         ]);
 
         $infologin = [
@@ -36,6 +37,35 @@ class SesiController extends Controller
         } else {
             return redirect('')->withErrors('Username atau password yang dimasukkan tidak sesuai')->withInput();
         }
+    }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function registerCreate(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|unique:users,email',
+            'name'  => 'required',
+            'password' => 'required'
+
+        ], [
+            'email.required' => 'Email harus diisi',
+            'email.unique' => 'Email sudah terdaftar',
+            'name.required' => 'Nama harus diisi',
+            'password.required' => 'Password harus diisi',
+        ]);
+
+        User::create([
+            'email' => $request->email,
+            'name' => $request->name,
+            'password' => $request->password,
+            'role' => 'user',
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Anda Berhasil Register');
     }
 
     function logout()

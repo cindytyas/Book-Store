@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,72 +10,90 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('user-template/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('user-template/css/owl.carousel.css') }}" />
+    <link rel="stylesheet" href="{{ asset('user-template/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('user-template/css/animate.css') }}" />
+
+    {{-- Import CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/test.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
+
+    <!-- Header section -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <!-- logo -->
+            <div class="site-logo">
+                <img width="100" height="90" src="{{ asset('user-template/img/logo.png') }}" alt="logo">
+            </div>
+            <!-- responsive -->
+            <div class="nav-switch">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div class="header-right">
+                <a href="#" class="card-bag"><img src="{{ asset('user-template/img/icons/bag.png') }}"
+                        alt="">
+                        <span>{{ $transaksiCount }}</span>
+                </a>
+                <a href="#" class="search"><img src="{{ asset('user-template/img/icons/search.png') }}"
+                        alt=""></a>
+            </div>
+            <!-- site menu -->
+            <ul class="main-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">New</a></li>
+                <li><a href="#">Best Seller</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <!-- Header section end -->
+
+    <div>
+        @yield('content')
+    </div>
+
+    <!-- Footer section -->
+    <footer class="footer-section">
+        <div class="container">
+            <p class="copyright">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
+                    aria-hidden="true"></i> by <a href="#" target="_blank">Cindy</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+
+    <!--====== Javascripts & Jquery ======-->
+    <script src="{{ asset('user-template/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('user-template/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('user-template/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('user-template/js/sly.min.js') }}"></script>
+    <script src="{{ asset('user-template/js/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('user-template/js/main.js') }}"></script>
 </body>
+
 </html>
